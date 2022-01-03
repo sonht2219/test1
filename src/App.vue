@@ -1,28 +1,87 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <v-app>
+        <v-app-bar
+            app
+            color="primary"
+            dark
+        >
+            <div class="d-flex align-center">
+                <v-img
+                    alt="Vuetify Logo"
+                    class="shrink mr-2"
+                    contain
+                    src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+                    transition="scale-transition"
+                    width="40"
+                />
+
+                <v-img
+                    alt="Vuetify Name"
+                    class="shrink mt-1 hidden-sm-and-down"
+                    contain
+                    min-width="100"
+                    src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+                    width="100"
+                />
+            </div>
+
+            <v-spacer></v-spacer>
+
+            <v-btn
+                href="https://github.com/vuetifyjs/vuetify/releases/latest"
+                target="_blank"
+                text
+            >
+                <span class="mr-2">Latest Release</span>
+                <v-icon>mdi-open-in-new</v-icon>
+            </v-btn>
+        </v-app-bar>
+
+        <v-main>
+            <v-btn @click="openModal">open modal</v-btn>
+            <v-btn @click="openModal2">open modal2</v-btn>
+        </v-main>
+    </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// import Alert from "@/components/Alert";
+import Form from "@/components/Form";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    name: 'App',
+    data: () => ({
+        show: false
+    }),
+    methods: {
+        openModal() {
+            this.$dialog
+                .open({title: 'Mở modal test', message: 'Bạn có muốn xóa không ?'})
+                .then(result => {
+                    setTimeout(() => {
+                        result.loading(false);
+                        result.close();
+                    }, 3000)
+                })
+                .catch(d => {
+                    console.log(d);
+                })
+        },
+        openModal2() {
+            this.$dialog
+                .view(Form.name, Form)
+                .open({
+                    view: Form.name,
+                    title: 'Mở alert test',
+                    message: 'Bạn có muốn xóa alert không ?',
+                    hasOk: false
+                })
+                .then(result => {
+                    console.log(result);
+                })
+                .catch(result => {
+                    console.log(result);
+                })
+        }
+    }
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
