@@ -9,13 +9,6 @@ build site:
     paths:
       - dist
 
-unit test:
-  image: node:16
-  stage: test
-  script:
-    - npm install
-    - npm run unit
-
 deploy:
   image: alpine
   stage: deploy
