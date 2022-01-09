@@ -38,7 +38,7 @@
         </v-app-bar>
 
         <v-main>
-            <v-btn @click="openModal">open modal</v-btn>
+            <v-btn @click="openModal">open modal 1</v-btn>
             <v-btn @click="openModal2">open modal2</v-btn>
         </v-main>
     </v-app>
