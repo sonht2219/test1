@@ -2,7 +2,7 @@ build_dev:
   image: node:16
   script:
     - npm install
-    - npm run build --mode dev
+    - npm run build:dev
   artifacts:
     expire_in: 1 week
     paths:
@@ -28,7 +28,7 @@ build_prod:
   image: node:16
   script:
     - npm install
-    - npm run build --mode prod
+    - npm run build:prod
   artifacts:
     expire_in: 1 week
     paths:
